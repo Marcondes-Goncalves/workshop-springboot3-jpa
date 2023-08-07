@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 // implementamos o Serializable na classe para que os objetos possam trafegar na rede!!
+//@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property="@id")
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable {
@@ -21,6 +22,9 @@ public class User implements Serializable {
     private String email;
     private String phone;
     private String password;
+
+    public User(){
+    }
 
     public User(Long id, String name, String email, String phone, String password) {
         this.id = id;
