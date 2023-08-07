@@ -2,10 +2,21 @@ package com.marcondesweb.course.entities;
 
 import java.io.Serializable;
 
-// implementamos o Serializable na classe para que os objetos possam trafegar na rede!! 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+// implementamos o Serializable na classe para que os objetos possam trafegar na rede!!
+@Entity
+@Table(name = "tb_user")
 public class User implements Serializable {
     
+    @Id //declarando para o jpa que o id é a chave primaria do banco de dados
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // com essa anotação o id será incrementado automáticamente assim que novos dados forem inseridos no banco
     private long id;
+
     private String name;
     private String email;
     private String phone;
