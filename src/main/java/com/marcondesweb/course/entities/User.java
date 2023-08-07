@@ -1,11 +1,14 @@
 package com.marcondesweb.course.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 // implementamos o Serializable na classe para que os objetos possam trafegar na rede!!
@@ -22,6 +25,9 @@ public class User implements Serializable {
     private String email;
     private String phone;
     private String password;
+
+    @OneToMany(mappedBy = "client") // um para muitos
+    private List<Order> orders = new ArrayList<>();
 
     public User(){
     }
@@ -74,6 +80,10 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public List<Order> getOrders() {
+        return orders;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -95,6 +105,8 @@ public class User implements Serializable {
             return false;
         return true;
     }
+
+    
     
     
 
