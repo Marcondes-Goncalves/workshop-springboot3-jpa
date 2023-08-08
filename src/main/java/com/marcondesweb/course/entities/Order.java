@@ -3,6 +3,8 @@ package com.marcondesweb.course.entities;
 import java.io.Serializable;
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,6 +21,7 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // com essa anotação o id será incrementado automáticamente assim que novos dados forem inseridos no banco
     private Long id;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
 
     @ManyToOne // essa anotação especifica que um cliente pode ter vários pedidos
