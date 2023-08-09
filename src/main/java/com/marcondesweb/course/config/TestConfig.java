@@ -8,9 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.marcondesweb.course.entities.Category;
 import com.marcondesweb.course.entities.Order;
 import com.marcondesweb.course.entities.User;
 import com.marcondesweb.course.entities.enums.OrderStatus;
+import com.marcondesweb.course.repositories.CategoryRepository;
 import com.marcondesweb.course.repositories.OrderRepository;
 import com.marcondesweb.course.repositories.UserRepository;
 
@@ -24,10 +26,18 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Override // tudo que estiver dentro desse método será iniciado quando a aplicação for iniciada
     public void run(String... args) throws Exception {
         
-        // tive que fazer o cast para o tipo de dado associado ao ID
+        Category cat1= new Category(null, "Electronics"); 
+        Category cat2= new Category(null, "Books"); 
+        Category cat3= new Category(null, "Computers");
+
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+
         User u1 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
         User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
 
