@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.marcondesweb.course.entities.User;
 import com.marcondesweb.course.repositories.UserRepository;
+import com.marcondesweb.course.services.exceptions.ResourceNotFoundException;
 
 
 @Service
@@ -22,7 +23,7 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> obj = repository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     //inserindo um objeto no banco de dados
