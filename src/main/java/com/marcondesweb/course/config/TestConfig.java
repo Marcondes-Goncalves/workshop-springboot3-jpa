@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.marcondesweb.course.entities.Category;
 import com.marcondesweb.course.entities.Order;
 import com.marcondesweb.course.entities.OrderItem;
+import com.marcondesweb.course.entities.Payment;
 import com.marcondesweb.course.entities.Product;
 import com.marcondesweb.course.entities.User;
 import com.marcondesweb.course.entities.enums.OrderStatus;
@@ -84,6 +85,11 @@ public class TestConfig implements CommandLineRunner {
 
         //salvando no banco
         orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
+        Payment pay1 = new Payment(null,  Instant.parse("2019-06-20T21:53:07Z"), o1);
+        o1.setPayment(pay1);
+
+        orderRepository.save(o1);
 
     }
 
