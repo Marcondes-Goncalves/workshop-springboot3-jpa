@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.marcondesweb.course.entities.Category;
 import com.marcondesweb.course.entities.Order;
+import com.marcondesweb.course.entities.OrderItem;
 import com.marcondesweb.course.entities.Product;
 import com.marcondesweb.course.entities.User;
 import com.marcondesweb.course.entities.enums.OrderStatus;
 import com.marcondesweb.course.repositories.CategoryRepository;
+import com.marcondesweb.course.repositories.OrderItemRepository;
 import com.marcondesweb.course.repositories.OrderRepository;
 import com.marcondesweb.course.repositories.ProductRepository;
 import com.marcondesweb.course.repositories.UserRepository;
@@ -33,6 +35,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @Override // tudo que estiver dentro desse método será iniciado quando a aplicação for iniciada
     public void run(String... args) throws Exception {
@@ -71,6 +76,14 @@ public class TestConfig implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+
+        OrderItem oi1= new OrderItem(o1, p1, 2, p1.getPrice()); 
+        OrderItem oi2= new OrderItem(o1, p3, 1, p3.getPrice()); 
+        OrderItem oi3= new OrderItem(o2, p3, 2, p3.getPrice()); 
+        OrderItem oi4= new OrderItem(o3, p5, 2, p5.getPrice());
+
+        //salvando no banco
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 
     }
 
